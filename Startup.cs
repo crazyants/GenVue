@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using AspNet.Security.OpenIdConnect.Primitives;
 using GenVue.Services;
+using GenVue.Models.InitData;
 
 namespace GenVue
 {
@@ -120,7 +121,7 @@ namespace GenVue
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -144,6 +145,12 @@ namespace GenVue
             // Seed the database with the sample applications.
             // Note: in a real world application, this step should be part of a setup script.
             InitializeAsync(app.ApplicationServices, CancellationToken.None).GetAwaiter().GetResult();
+
+            if (env.IsDevelopment())
+            {
+                // init roles and users
+                DBInitilizer.Initialize(serviceProvider);
+            }
 
             //app.UseMvc(routes =>
             //{
