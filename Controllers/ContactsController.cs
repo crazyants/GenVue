@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace GenVue.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("api/[controller]")]
     public class ContactsController : Controller
     {
