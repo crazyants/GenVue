@@ -5,10 +5,11 @@ using GenVue.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
+using AspNet.Security.OAuth.Validation;
 
 namespace GenVue.Controllers
 {
-    //[Authorize]
+    [Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class ContactsController : Controller
     {
