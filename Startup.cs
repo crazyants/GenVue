@@ -49,34 +49,34 @@ namespace GenVue
 
             // Do not 302 redirect when Unauthorized; just return 401 status code
             // see https://www.illucit.com/blog/2016/04/asp-net-5-identity-302-redirect-vs-401-unauthorized-for-api-ajax-requests/
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    options.Events.OnRedirectToLogin = context =>
-            //    {
-            //        context.Response.StatusCode = 401;
-            //        return Task.CompletedTask;
-            //    };
-            //});
-
             services.ConfigureApplicationCookie(options =>
             {
-                options.LoginPath = new PathString("/Account/Login");
-                options.LogoutPath = new PathString("/Account/Logout");
-
                 options.Events.OnRedirectToLogin = context =>
                 {
-                    if (context.Request.Path.StartsWithSegments("/api")
-                        && context.Response.StatusCode == StatusCodes.Status200OK)
-                    {
-                        context.Response.Clear();
-                        context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                        return Task.FromResult<object>(null);
-
-                    }
-                    context.Response.Redirect(context.RedirectUri);
-                    return Task.FromResult<object>(null);
+                    context.Response.StatusCode = 401;
+                    return Task.CompletedTask;
                 };
             });
+
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    options.LoginPath = new PathString("/Account/Login");
+            //    options.LogoutPath = new PathString("/Account/Logout");
+
+            //    options.Events.OnRedirectToLogin = context =>
+            //    {
+            //        if (context.Request.Path.StartsWithSegments("/api")
+            //            && context.Response.StatusCode == StatusCodes.Status200OK)
+            //        {
+            //            context.Response.Clear();
+            //            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            //            return Task.FromResult<object>(null);
+
+            //        }
+            //        context.Response.Redirect(context.RedirectUri);
+            //        return Task.FromResult<object>(null);
+            //    };
+            //});
 
             // Configure Identity to use the same JWT claims as OpenIddict instead
             // of the legacy WS-Federation claims it uses by default (ClaimTypes),

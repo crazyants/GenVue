@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Contacts</h1>
     <form class="form-inline my-2 my-lg-0" v-on:submit.prevent="onSearch">
       <input class="form-control form-control form-control-sm" type="text" v-model="searchQuery" placeholder="Search" />
       <button class="btn btn-outline-success btn-sm" type="submit">Search</button>&nbsp;

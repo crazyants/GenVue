@@ -3,7 +3,7 @@
         <!--Main Navigation-->
         <header>
 
-            <nav class="navbar navbar-expand-lg navbar-dark">
+            <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
                 <div class="container">
                     <a class="navbar-brand" href="#"><strong>NetCore 2 and Vue.js</strong></a>
                     
@@ -69,6 +69,6 @@ export default class DefaultLayout extends Vue {
     }
 
     main {
-        padding-top: 10px;
+        padding-top: 70px;
     }
 </style>
