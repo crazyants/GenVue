@@ -10,6 +10,7 @@ import './polyfills/object-assign';
 import './polyfills/array-find';
 import './polyfills/string-startsWith';
 
+
 import Vue from 'vue';
 import Component from 'vue-class-component';
 import AuthService from './services/Auth';
@@ -21,22 +22,15 @@ export default class App extends Vue { }
 <style lang="stylus">
 
 /*
- * Global Styles
+ * Global App Styles
  */
 
+@import '../node_modules/font-awesome/css/font-awesome.css'; 
 @import '../node_modules/bootstrap/dist/css/bootstrap.css';
-@require './styles/auth.styl';
+@import 'styles/css/mdb.css';
 
-body {
-  padding-top: 5rem;
-  font-family: "century gothic", verdana;
-}
 
-.btn-link {
-  cursor: pointer;
-}
-
-.btn {
-  margin: 10px 3px 10px 3px;
-}
 </style>
+
+
+
