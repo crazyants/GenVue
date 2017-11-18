@@ -86,6 +86,7 @@ namespace GenVue
                 options.ClaimsIdentity.UserNameClaimType = OpenIdConnectConstants.Claims.Name;
                 options.ClaimsIdentity.UserIdClaimType = OpenIdConnectConstants.Claims.Subject;
                 options.ClaimsIdentity.RoleClaimType = OpenIdConnectConstants.Claims.Role;
+                options.SignIn.RequireConfirmedEmail = true;
             });
 
             services.AddAuthentication()
