@@ -1,17 +1,22 @@
 {
   "compilerOptions": {
+    "sourceMap": true,
+    "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "module": "es2015",
-    "moduleResolution": "node",
     "target": "es5",
-    "sourceMap": true,
-    "skipDefaultLibCheck": true,
-    "strict": true,
-    "types": ["webpack-env"]
+    "lib": [
+      "dom",
+      "es5",
+      "es2015.promise"
+    ],
+    "moduleResolution": "node"
   },
-  "exclude": [
-      "bin",
-      "node_modules"
+  "files": [
+    "./ClientApp/boot.ts"
+  ],
+  "include": [
+    "./ClientApp/**/*.d.ts"
   ]
 }

@@ -49,7 +49,7 @@ namespace GenVue.Controllers
         // Note: to support interactive flows like the code flow,
         // you must provide your own authorization endpoint action:
 
-        [Authorize, HttpGet("~/connect/authorize")]
+        [Authorize, HttpGet("~/api/connect/authorize")]
         public async Task<IActionResult> Authorize(OpenIdConnectRequest request)
         {
             Debug.Assert(request.IsAuthorizationRequest(),
@@ -78,7 +78,7 @@ namespace GenVue.Controllers
         }
 
         [Authorize, FormValueRequired("submit.Accept")]
-        [HttpPost("~/connect/authorize"), ValidateAntiForgeryToken]
+        [HttpPost("~/api/connect/authorize"), ValidateAntiForgeryToken]
         public async Task<IActionResult> Accept(OpenIdConnectRequest request)
         {
             Debug.Assert(request.IsAuthorizationRequest(),
@@ -104,7 +104,7 @@ namespace GenVue.Controllers
         }
 
         [Authorize, FormValueRequired("submit.Deny")]
-        [HttpPost("~/connect/authorize"), ValidateAntiForgeryToken]
+        [HttpPost("~/api/connect/authorize"), ValidateAntiForgeryToken]
         public IActionResult Deny()
         {
             // Notify OpenIddict that the authorization grant has been denied by the resource owner
@@ -115,7 +115,7 @@ namespace GenVue.Controllers
         // Note: the logout action is only useful when implementing interactive
         // flows like the authorization code flow or the implicit flow.
 
-        [HttpGet("~/connect/logout")]
+        [HttpGet("~/api/connect/logout")]
         public IActionResult Logout(OpenIdConnectRequest request)
         {
             Debug.Assert(request.IsLogoutRequest(),
@@ -130,7 +130,7 @@ namespace GenVue.Controllers
             });
         }
 
-        [HttpPost("~/connect/logout"), ValidateAntiForgeryToken]
+        [HttpPost("~/api/connect/logout"), ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
             // Ask ASP.NET Core Identity to delete the local and external cookies created
@@ -148,7 +148,7 @@ namespace GenVue.Controllers
         // Note: to support non-interactive flows like password,
         // you must provide your own token endpoint action:
 
-        [HttpPost("~/connect/token"), Produces("application/json")]
+        [HttpPost("~/api/connect/token"), Produces("application/json")]
         public async Task<IActionResult> Exchange(OpenIdConnectRequest request)
         {
             Debug.Assert(request.IsTokenRequest(),

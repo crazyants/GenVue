@@ -116,9 +116,9 @@ namespace GenVue
                 options.AddMvcBinders();
 
                 // Enable the authorization, logout, token and userinfo endpoints.
-                options.EnableAuthorizationEndpoint("/connect/authorize")
-                       .EnableLogoutEndpoint("/connect/logout")
-                       .EnableTokenEndpoint("/connect/token")
+                options.EnableAuthorizationEndpoint("/api/connect/authorize")
+                       .EnableLogoutEndpoint("/api/connect/logout")
+                       .EnableTokenEndpoint("/api/connect/token")
                        .EnableUserinfoEndpoint("/api/userinfo");
 
                 // Note: the Mvc.Client sample only uses the code flow and the password flow, but you

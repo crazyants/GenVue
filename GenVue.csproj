@@ -21,8 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="ClientApp\" />
     <Folder Include="Helpers\" />
     <Folder Include="ViewModels\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
