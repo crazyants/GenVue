@@ -30,7 +30,7 @@
           </div>
 
           <div class="text-center">
-              <button class="btn btn-default">Login</button>
+              <button class="btn btn-default" type="submit">Login</button>
           </div>
       </form>
       <!-- Form login -->
