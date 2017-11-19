@@ -1,21 +1,19 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using GenVue.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Linq;
-using AspNet.Security.OAuth.Validation;
+using GenVue.Model;
 
 namespace GenVue.Controllers
 {
-    [Authorize(AuthenticationSchemes = OAuthValidationDefaults.AuthenticationScheme)]
     [Route("api/[controller]")]
     public class ContactsController : Controller
     {
-        ApplicationDbContext _context;
+        DefaultDbContext _context;
 
-        public ContactsController(ApplicationDbContext context)
+        public ContactsController(DefaultDbContext context)
         {
             _context = context;
         }

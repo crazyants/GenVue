@@ -1,69 +1,51 @@
-var webpack = require('webpack');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
-var releaseConfig = require('./webpack.config.release');
-var isProductionEnvironment = process.env.ASPNETCORE_ENVIRONMENT === 'Production';
-var path = require('path');
-var merge = require('extendify')({ isDeep: true, arrays: 'replace' });
+const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const bundleOutputDir = './wwwroot/dist';
 
-var config = {
-    entry: {
-        main: path.join(__dirname, 'ClientApp/boot.ts')
-    },
-    output: {
-        path: path.join(__dirname, 'wwwroot'),
-        filename: '[name].js',
-        publicPath: '/'
-    },
-    resolve: {
-        extensions: ['.ts', '.js', '.vue', '.styl', '.css']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.styl$/,
-                use: [{
-                    loader: 'style-loader'
-                }, {
-                    loader: 'css-loader',
-                    options: {
-                        modules: true,
-                        camelCase: true,
-                        importLoaders: 2,
-                        sourceMap: false,
-                        localIdentName: "[local]___[hash:base64:5]"
-                    }
-                }, {
-                    loader: 'stylus-loader'
-                }]
-            },
-            {
-                test: /\.ts$/,
-                loader: 'ts-loader',
-                options: {
-                    appendTsSuffixTo: [/\.vue$/]
-                }
-            },
-            {
-                test: /\.vue$/,
-                loader: 'vue-loader'
-            },
-            { test: /\.css/, loader: 'style-loader!css-loader' },
-            { test: /\.(png|woff|woff2|eot|ttf|svg)$/, loader: 'url-loader?limit=100000' }
-        ]
-    },
-    devtool: 'inline-source-map',
-    plugins: [ // plugins should not be empty: https://github.com/aspnet/JavaScriptServices/tree/dev/src/Microsoft.AspNetCore.SpaServices'[
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'ClientApp/index.template.html'), inject: true
-        })
-        // new webpack.NamedModulesPlugin()
-        // We do not use ExtractTextPlugin in development mode so that HMR will work with styles
-    ]
+module.exports = (env) => {
+    const isDevBuild = !(env && env.prod);
+    return [{
+        stats: { modules: false },
+        entry: { 'main': './ClientApp/boot-app.js' },
+        resolve: {
+            extensions: ['.js', '.vue'],
+            alias: {
+                'vue$': 'vue/dist/vue',
+                'components': path.resolve(__dirname, './ClientApp/components'),
+                'views': path.resolve(__dirname, './ClientApp/views'),
+                'utils': path.resolve(__dirname, './ClientApp/utils'),
+                'api': path.resolve(__dirname, './ClientApp/store/api')
+            }
+        },
+        output: {
+            path: path.join(__dirname, bundleOutputDir),
+            filename: '[name].js',
+            publicPath: '/dist/'
+        },
+        module: {
+            rules: [
+                { test: /\.vue$/, include: /ClientApp/, use: 'vue-loader' },
+                { test: /\.js$/, include: /ClientApp/, use: 'babel-loader' },
+                { test: /\.css$/, use: isDevBuild ? ['style-loader', 'css-loader'] : ExtractTextPlugin.extract({ use: 'css-loader' }) },
+                { test: /\.(png|jpg|jpeg|gif|svg)$/, use: 'url-loader?limit=25000' }
+            ]
+        },
+        plugins: [
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                manifest: require('./wwwroot/dist/vendor-manifest.json')
+            })
+        ].concat(isDevBuild ? [
+            // Plugins that apply in development builds only
+            new webpack.SourceMapDevToolPlugin({
+                filename: '[file].map', // Remove this line if you prefer inline source maps
+                moduleFilenameTemplate: path.relative(bundleOutputDir, '[resourcePath]') // Point sourcemap entries to the original file locations on disk
+            })
+        ] : [
+                // Plugins that apply in production builds only
+                new webpack.optimize.UglifyJsPlugin(),
+                new ExtractTextPlugin('site.css')
+            ])
+    }];
 };
-
-if (isProductionEnvironment) {
-    // Merge production config
-    config = merge(config, releaseConfig);
-}
-
-module.exports = config;
