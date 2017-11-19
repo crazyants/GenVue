@@ -16,25 +16,34 @@ using GenVue.Services;
 using GenVue.Models.InitData;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace GenVue
 {
     public class Startup
     {
 
+        public IHostingEnvironment CurrentEnvironment { get; protected set; }
+        public IConfigurationRoot Configuration { get; }
+
+        public Startup(IHostingEnvironment env)
+        {
+            this.CurrentEnvironment = env;
+
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            Configuration = builder.Build();
+        }
+
         public void ConfigureServices(IServiceCollection services)
         {
-            var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json")
-                .AddEnvironmentVariables()
-                .Build();
-
-            services.AddMvc();
-
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 // Configure the context to use Microsoft SQL Server.
-                options.UseSqlServer(configuration["Data:DefaultConnection:ConnectionString"]);
+                options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]);
 
                 // Register the entity sets needed by OpenIddict.
                 // Note: use the generic overload if you need
@@ -90,17 +99,17 @@ namespace GenVue
             });
 
             services.AddAuthentication()
-                .AddGoogle(options =>
-                {
-                    options.ClientId = "xxx-xx.apps.googleusercontent.com";
-                    options.ClientSecret = "xxx-xxxx";
-                })
+                //.AddGoogle(options =>
+                //{
+                //    options.ClientId = "xxx-xx.apps.googleusercontent.com";
+                //    options.ClientSecret = "xxx-xxxx";
+                //})
 
-                .AddTwitter(options =>
-                {
-                    options.ConsumerKey = "xxx";
-                    options.ConsumerSecret = "xxx";
-                })
+                //.AddTwitter(options =>
+                //{
+                //    options.ConsumerKey = "xxx";
+                //    options.ConsumerSecret = "xxx";
+                //})
 
                 .AddOAuthValidation();
 
@@ -152,29 +161,48 @@ namespace GenVue
 
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            // Add framework services
+            services.AddMvc().AddJsonOptions(options =>
+            {
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IServiceProvider serviceProvider, ILoggerFactory loggerFactory)
         {
+            loggerFactory.AddConsole(Configuration.GetSection("logging"));
+            loggerFactory.AddDebug();
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
+
                 app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions
                 {
                     HotModuleReplacement = true
                 });
             }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+            //else
+            //{
+            //    app.UseExceptionHandler("/Home/Error");
+            //}
 
+            // If not requesting /api*, rewrite to / so SPA app will be returned
+            //app.UseSpaFallback(new SpaFallbackOptions()
+            //{
+            //    ApiPathPrefix = "/api",
+            //    RewritePath = "/"
+            //});
+
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseAuthentication();
 
-            app.UseMvcWithDefaultRoute();
+            //app.UseMvcWithDefaultRoute();
 
             // Seed the database with the sample applications.
             // Note: in a real world application, this step should be part of a setup script.
@@ -186,16 +214,18 @@ namespace GenVue
                 DBInitilizer.Initialize(serviceProvider);
             }
 
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
 
-            //    routes.MapSpaFallbackRoute(
-            //        name: "spa-fallback",
-            //        defaults: new { controller = "Home", action = "Index" });
-            //});
+                //routes.MapSpaFallbackRoute(
+                //    name: "spa-fallback",
+                //    defaults: new { controller = "Home", action = "Index" });
+            });
+
+            //           app.UseMvc();
         }
 
         private async Task InitializeAsync(IServiceProvider services, CancellationToken cancellationToken)
