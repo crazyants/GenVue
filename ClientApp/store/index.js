@@ -1,4 +1,4 @@
-﻿import Vue from 'vue'
+import Vue from 'vue'
 import Vuex from 'vuex'
 
 Vue.use(Vuex)
@@ -8,6 +8,7 @@ const MAIN_SET_COUNTER = 'MAIN_SET_COUNTER'
 
 // STATE
 const state = {
+    isLoggedIn: false,
     counter: 0
 }
 
@@ -15,6 +16,12 @@ const state = {
 const mutations = {
     [MAIN_SET_COUNTER](state, obj) {
         state.counter = obj.counter
+    },
+    login(state) {
+        state.isLoggedIn = true
+    },
+    logout(state) {
+        state.isLoggedIn = false
     }
 }
 
@@ -24,6 +31,9 @@ const actions = ({
         commit(MAIN_SET_COUNTER, obj)
     }
 })
+
+// GETTERS
+
 
 export default new Vuex.Store({
     state,

@@ -1,7 +1,7 @@
 {
     "name": "aspnetcore-vuejs",
-    "description": "ASP.NET Core & VueJS Starter project",
-    "author": "",
+    "description": "ASP.NET Core & VueJS & WebAPI & OpenId Starter project",
+    "author": "Adam Adamczyk",
     "scripts": {
         "dev": "cross-env ASPNETCORE_ENVIRONMENT=Development NODE_ENV=development dotnet run",
         "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
