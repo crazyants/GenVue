@@ -2,7 +2,7 @@
     <div>
         <h1>contacts</h1>
 
-        <p>This component demonstrates fetching contacts data from the server DB.</p>
+        <p>This component demonstrates fetching contacts data from the server DB (requrires login first).</p>
 
         <p v-if="!contacts"><em>Loading...</em></p>
 
