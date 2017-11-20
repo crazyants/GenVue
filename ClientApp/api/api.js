@@ -1,3 +1,8 @@
+// this data must be same like in db table OpenIddictApplications
+// otherwise call for auth token will be rejected
+const client_id = 'mvc'
+const client_secret = '101564A5-E7FE-42CB-B10D-61EF6A8F3651'
+
 var token
 
 // create a fetch request with url and props passed and return a promise with the data returned
@@ -43,7 +48,7 @@ export default {
         var fetchProps = {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: 'grant_type=password&username=' + email + '&password=' + password + "&client_id=mvc" + "&client_secret=101564A5-E7FE-42CB-B10D-61EF6A8F3651"
+            body: 'grant_type=password&username=' + email + '&password=' + password + "&client_id=" + client_id + "&client_secret=" + client_secret
         }
         var p = new Promise((resolve, reject) => {
             window.fetch('/api/connect/token', fetchProps).then((response) => {
@@ -63,5 +68,8 @@ export default {
     },
     getUser: function () {
         return getFetchRequestPromise('/api/userinfo');
+    },
+    getContacts: function () {
+        return getFetchRequestPromise('/api/contacts');
     }
 }

@@ -9,6 +9,7 @@ const MAIN_SET_COUNTER = 'MAIN_SET_COUNTER'
 // STATE
 const state = {
     isLoggedIn: false,
+    contacts : null,
     counter: 0
 }
 
@@ -22,6 +23,9 @@ const mutations = {
     },
     logout(state) {
         state.isLoggedIn = false
+    },
+    setContacts(state, contacts) {
+        state.contacts = contacts
     }
 }
 

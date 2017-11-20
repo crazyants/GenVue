@@ -5,8 +5,8 @@
             <fieldset>
                 <div>
                     <div>
-                        <input v-model="email" type="text" max="100" placeholder="Email address" autofocus="" value="admin@genvue.com" />
-                        <input v-model="password" type="password" max="100" placeholder="Password" value="123PassWord.!"/>
+                        <input v-model="email" type="text" max="100" placeholder="Email address" autofocus="" />
+                        <input v-model="password" type="password" max="100" placeholder="Password" />
                     </div>
                 </div>
                 <div v-if="error" class="error">
@@ -38,8 +38,8 @@
         },
         data: function () {
             return {
-                email: '',
-                password: '',
+                email: 'admin@genvue.com',
+                password: '123PassWord.!',
                 loggingIn: false,
                 error: null
             }

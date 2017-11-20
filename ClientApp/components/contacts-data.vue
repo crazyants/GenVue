@@ -30,26 +30,32 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            contacts: null
-        }
-    },
+    import api from '../api/api'
 
-    methods: {
-    },
+    export default {
+        data() {
+            return {
+                contacts: null
+            }
+        },
 
-    async created() {
-        try {
-            let response = await this.$http.get('/api/contacts')
-            console.log(response.data);
-            this.contacts = response.data;
-        } catch (error) {
-            console.log(error)
+        methods: {
+        },
+
+        async created() {
+            try {
+                console.log('try to call getContacts...');
+                api.getContacts().then((data) => {
+                    console.log('data: ' + data)
+                    this.contacts = data
+                })
+
+            } catch (error) {
+                console.log('catch getContacts error : ' + error)
+            }
         }
+
     }
-}
 </script>
 
 <style>
