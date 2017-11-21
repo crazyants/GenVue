@@ -14,9 +14,6 @@
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav mr-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                            </li>
                             <li class="nav-item">
                                 <router-link class="nav-link" to="/counter">Counter</router-link>
                             </li>
@@ -29,10 +26,10 @@
                         </ul>   
 
                         <div v-show="$store.state.isLoggedIn">
-                            <button class="btn btn-outline-warning my-2 my-sm-0" type="button" v-on:click="signOut">Sign out</button>
+                            <button class="btn btn-outline-warning my-2 my-sm-0" type="button" v-on:click="logout">Logout</button>
                         </div>
                         <div v-show="!$store.state.isLoggedIn">
-                            <button class="btn btn-outline-default my-2 my-sm-0" type="button" v-on:click="signIn">Sign in</button>
+                            <button class="btn btn-outline-default my-2 my-sm-0" type="button" v-on:click="login">Login</button>
                         </div>
                     </div>
 
@@ -52,17 +49,6 @@
 
 <script>
 import Vue from 'vue'
-//import CounterExample from './counter-example'
-//import FetchData from './fetch-data'
-//import HomePage from './home-page'
-//import NavMenu from './nav-menu'
-//import ContactData from './contacts-data'
-
-//Vue.component('counter-example', CounterExample);
-//Vue.component('fetch-data', FetchData);
-//Vue.component('home-page', HomePage);
-//Vue.component('nav-menu', NavMenu);
-//Vue.component('contacts-data', ContactData);
 
 export default {
     data() {
@@ -71,15 +57,14 @@ export default {
     },
 
     methods: {
-        signIn() {
-            console.log('signIn called.');
+        login() {
+            console.log('login called.');
             this.$router.push({ path: '/login' });
         },
-        signOut() {
-            console.log('signOut called.')
-            //let authService = new AuthService();
-            //authService.signOut();
-            //this.$router.push({ path: '/?signedOut=1' });
+        logout() {
+            console.log('logout called.')
+            this.$store.commit('logout')
+            this.$router.push('/')
         }
     },
 
@@ -113,6 +98,6 @@ export default {
     }
 
     main {
-        padding-top: 70px;
+        padding-top: 100px;
     }
 </style>

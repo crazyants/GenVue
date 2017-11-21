@@ -1,12 +1,17 @@
 <template>
     <div>
-        <h1>contacts</h1>
+        <h1>Contacts</h1>
 
-        <p>This component demonstrates fetching contacts data from the server DB (requrires login first).</p>
+        <h5>
+            <strong>This component demonstrates fetching contacts data from the server DB by WebAPI.</strong>
+            <small class="text-muted">User login is required.</small>
+        </h5>
 
         <p v-if="!contacts"><em>Loading...</em></p>
 
-        <table class="table" v-if="contacts">
+        <br/>
+
+        <table class="table table-striped" v-if="contacts">
             <thead>
                 <tr>
                     <th>lastName</th>

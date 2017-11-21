@@ -1,29 +1,39 @@
 <template>
     <div>
-        <form id="loginForm" name="loginForm">
-            <h2>Login</h2>
-            <fieldset>
-                <div>
-                    <div>
-                        <input v-model="email" type="text" max="100" placeholder="Email address" autofocus="" />
-                        <input v-model="password" type="password" max="100" placeholder="Password" />
-                    </div>
-                </div>
-                <div v-if="error" class="error">
-                    {{ error }}
-                </div>
-                <p>
-                    <button v-on:click.prevent="login">Login</button>
-                    <modal v-if="loggingIn">
-                        <h3 slot="header">Logging In</h3>
-                        <loading slot="body"></loading>
-                        <div slot="footer"><span>Please Wait..</span></div>
-                    </modal>
-                </p>
-            </fieldset>
+        <!-- Form login -->
+        <form v-on:submit.prevent="onLogin">
+
+            <div v-if="error" class="alert alert-danger" role="alert">
+                {{error}}
+            </div>
+
+            <p class="h5 text-center mb-4">Login</p>
+
+            <div class="md-form">
+                <i class="fa fa-envelope prefix grey-text"></i>
+                <input type="email" id="inputEmail" v-model="username" class="form-control">
+                <label htmlFor="inputEmail">Your email</label>
+            </div>
+
+            <div class="md-form">
+                <i class="fa fa-lock prefix grey-text"></i>
+                <input type="password" id="inputPassword" v-model="password" class="form-control">
+                <label htmlFor="inputPassword">Your password</label>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-default" type="submit">Login</button>
+                <modal v-if="loggingIn">
+                    <h3 slot="header">Logging In</h3>
+                    <loading slot="body"></loading>
+                    <div slot="footer"><span>Please Wait..</span></div>
+                </modal>
+            </div>
         </form>
+        <!-- Form login -->
     </div>
 </template>
+
 
 <script>
     import api from '../api/api'
@@ -45,7 +55,7 @@
             }
         },
         methods: {
-            login: function () {
+            onLogin: function () {
                 this.loggingIn = true
                 var self = this
                 api.getToken(this.email, this.password).then(function () {

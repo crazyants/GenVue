@@ -2,11 +2,16 @@
     <div>
         <h1>Weather forecast</h1>
 
-        <p>This component demonstrates fetching data from the server.</p>
+        <h5>
+            <strong>This component demonstrates fetching data from the server by WebAPI.</strong>
+            <small class="text-muted">No login required.</small>
+        </h5>
+
+        <br/>
 
         <p v-if="!forecasts"><em>Loading...</em></p>
 
-        <table class="table" v-if="forecasts">
+        <table class="table table-striped" v-if="forecasts">
             <thead>
                 <tr>
                     <th>Date</th>
