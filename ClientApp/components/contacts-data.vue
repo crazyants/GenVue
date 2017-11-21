@@ -44,11 +44,18 @@
 
         async created() {
             try {
-                console.log('try to call getContacts...');
-                api.getContacts().then((data) => {
-                    console.log('data: ' + data)
-                    this.contacts = data
-                })
+
+                console.log('is login...' + this.$store.state.isLoggedIn);
+
+                if (!this.$store.state.isLoggedIn) {
+                    this.$router.push('/login')
+                } else {
+                    console.log('try to call getContacts...');
+                    api.getContacts().then((data) => {
+                        console.log('data: ' + data)
+                        this.contacts = data
+                    })
+                }
 
             } catch (error) {
                 console.log('catch getContacts error : ' + error)

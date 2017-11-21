@@ -54,7 +54,9 @@ This repo contains an AspNetCore 2 + Vue.js 2 starter template (VS2017) + NetCor
 List of github repos which have been my inspiration to build this template and may contains part of their source code.
 
 https://github.com/MarkPieszak/aspnetcore-Vue-starter
+
 https://github.com/andersco/FreedomCalculator2
+
 https://github.com/bradyholt/aspnet-core-vuejs-template
 
 ----
