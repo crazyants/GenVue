@@ -11,7 +11,7 @@
 
             <div class="md-form">
                 <i class="fa fa-envelope prefix grey-text"></i>
-                <input type="email" id="inputEmail" v-model="username" class="form-control">
+                <input type="email" id="inputEmail" v-model="email" class="form-control">
                 <label htmlFor="inputEmail">Your email</label>
             </div>
 
@@ -39,7 +39,6 @@
     import api from '../api/api'
     import loading from './Loading.vue'
     import modal from './Modal.vue'
-
     export default {
         name: 'Login',
         components: {
@@ -68,5 +67,4 @@
             }
         }
     }
-
 </script>
