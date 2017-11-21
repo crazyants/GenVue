@@ -1,4 +1,4 @@
-# Asp.NETCore 2.0 Vue 2 Starter
+# Asp.NETCore 2.0 Vue 2 with WebApi Authorization Starter template
 
 This repo contains an AspNetCore 2 + Vue.js 2 starter template (VS2017) + NetCore WebAPI + OpenIddict authorization. 
 ---
