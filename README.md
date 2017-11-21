@@ -25,8 +25,8 @@ This repo contains an AspNetCore 2 + Vue.js 2 starter template (VS2017) + NetCor
   - HMR (Hot Module Replacement/Reloading)
 - **Bootstrap 4**
   - Beta 2
-  **MdBootstrap**
-  - free version but lovely :-)
+- **MdBootstrap**
+  - free version but so lovely :-)
 
 # Prerequisites:
  * nodejs > 6
