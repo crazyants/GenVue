@@ -27,8 +27,8 @@
 
 <script>
     import api from '../api/api'
-    import loading from './loading.vue'
-    import modal from './modal.vue'
+    import loading from './Loading.vue'
+    import modal from './Modal.vue'
 
     export default {
         name: 'Login',
@@ -50,7 +50,7 @@
                 var self = this
                 api.getToken(this.email, this.password).then(function () {
                     self.$store.commit('login')
-                    self.$router.push('/statistics')
+                    self.$router.push('/afterlogin')
                 }).catch(function (error) {
                     self.loggingIn = false
                     self.error = error
