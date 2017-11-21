@@ -8,11 +8,9 @@ This repo contains an AspNetCore 2 + Vue.js 2 starter template (VS2017) + NetCor
 * [Features](#features)
 * [Prerequisites](#prerequisites)
 * [Installation - Getting Started!](#installation)
-* [Upcoming Features](#upcoming-features)
 * [Extras](#extras)
 * [Special Thanks](#special-thanks)
 * [License](#license)
-* [Social Media](#follow-me-online)
 * [Vue & ASP.NET Consulting & training](##looking-for-vue--javascript-or-aspnet-consulting--training--support)
 
 # Features
@@ -25,9 +23,10 @@ This repo contains an AspNetCore 2 + Vue.js 2 starter template (VS2017) + NetCor
   - Easy-to-use OpenID Connect server for ASP.NET Core
 - **Webpack 2**
   - HMR (Hot Module Replacement/Reloading)
-- **Bootstrap**
-- ...more details to come...
-
+- **Bootstrap 4**
+  - Beta 2
+  **MdBootstrap**
+  - free version but lovely :-)
 
 # Prerequisites:
  * nodejs > 6
@@ -37,7 +36,7 @@ This repo contains an AspNetCore 2 + Vue.js 2 starter template (VS2017) + NetCor
 # Installation / Getting Started:
  * Clone this repo
  * At the repo's root directory run `dotnet restore`
- * Restore Node dependencies by running `npm install`
+ * Restore Node dependencies by running `npm install` and install all required modules
  * Run the application (`dotnet run` or `npm run dev`)
  
  or
