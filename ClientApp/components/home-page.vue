@@ -1,16 +1,53 @@
 <template>
     <div>
-        <h1>Hello, world</h1>
+        <h1>Hello NetCore, WebAPI, OpenID & Vue.js </h1>
         <p>Welcome to your new SPA app, built with:</p>
-        <ul>
-            <li><a href="https://get.asp.net/">ASP.NET Core 2</a> and <a href="https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx">C#</a>                    for cross-platform server-side code</li>
-            <li><a href="https://vuejs.org/">Vue.js 2</a> and <a href="http://babeljs.io/">Bablel (ES6)</a>                    for client-side code</li>
-            <li><a href="https://webpack.github.io/">Webpack</a> for building and bundling client-side resources</li>
-            <li><a href="http://getbootstrap.com/">Bootstrap 4</a> for layout and styling</li>
-            <li><a href="https://mdbootstrap.com/">Mdbootstrap</a> for polishing layout and styling</li>
-            <li><a href="https://github.com/openiddict/openiddict-core">OpenId</a> Easy-to-use OpenID Connect server for ASP.NET Core</li>
-            <li><a href="api/SampleData/WeatherForecasts">API sample data</a> from the dotnet controller</li>
-        </ul>
+
+        <!--Section: Live preview-->
+        <section class="mt-5">
+
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-6">
+                    <h4><i class="fa fa-flag blue-text pr-2" aria-hidden="true"></i>ASP.NET Core 2</h4> for cross-platform server-side code.
+                    <a href="https://get.asp.net/">...more</a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <h4><i class="fa fa-arrows-alt teal-text pr-2" aria-hidden="true"></i> Vue.js 2</h4> thee Progressive JavaScript Framework. ... Approachable.
+                    <a href="https://vuejs.org/">...more</a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <h4><i class="fa fa-ban indigo-text pr-2" aria-hidden="true"></i> Webpack</h4> for building and bundling client-side resources.
+                    <a href="https://webpack.github.io/">...more</a>
+                </div>
+            </div>
+            <br>
+            <div class="row mb-3">
+                <div class="col-md-4 col-sm-6">
+                    <h4><i class="fa fa-microphone green-text pr-2" aria-hidden="true"></i>Bootstrap 4</h4> Build responsive, mobile-first projects on the web with the world's most popular front-end component library. 
+                    <a href="http://getboostrap.com/">...more</a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <h4><i class="fa fa-pencil deep-purple-text pr-2" aria-hidden="true"></i> Mdbootstrap</h4> for polishing layout and styling.
+                    <a href="https://mdbootstrap.com/">...more</a>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <h4><i class="fa fa-eye cyan-text pr-2" aria-hidden="true"></i> OpenIdDict</h4> Easy-to-use OpenID Connect server for ASP.NET Core.
+                    <a href="https://github.com/openiddict/openiddict-core">...more</a>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-md-4 col-sm-6">
+                    <h4><i class="fa fa-wheelchair blue-text pr-2" aria-hidden="true"></i> API sample data</h4>  from the dotnet controller
+                    on the web.
+                    <a href="api/SampleData/WeatherForecasts">...see it</a>
+                </div>
+
+            </div>
+
+        </section>
+        <!--Section: Live preview-->
+
 
     </div>
 </template>
