@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="animated fadeInDown">
         <!-- Form login -->
         <form v-on:submit.prevent="onLogin">
 
@@ -7,7 +7,7 @@
                 {{error}}
             </div>
 
-            <p class="h5 text-center mb-4">Login</p>
+            <p class="h3 text-center mb-4">Login</p>
 
             <div class="md-form">
                 <i class="fa fa-envelope prefix grey-text"></i>
@@ -31,7 +31,7 @@
             </div>
         </form>
         <!-- Form login -->
-    </div>
+    </div>                
 </template>
 
 
@@ -64,6 +64,19 @@
                     self.loggingIn = false
                     self.error = error
                 })
+            }
+        },
+        async created() {
+            try {
+
+                console.log('is login...' + this.$store.state.isLoggedIn);
+
+                if (this.$store.state.isLoggedIn) {
+                    this.$router.push('/afterlogin')
+                }
+
+            } catch (error) {
+                console.log('catch login.created error : ' + error)
             }
         }
     }
