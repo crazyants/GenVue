@@ -18,7 +18,9 @@ module.exports = (env) => {
             ]
         },
         entry: {
-            vendor: ['bootstrap', 'bootstrap/dist/css/bootstrap.css', 'font-awesome/css/font-awesome.css', 'mdbootstrap/css/mdb.css', 'event-source-polyfill', 'vue', 'vuex', 'axios', 'vue-router', 'jquery', 'mdbootstrap/js/mdb.js'],
+            vendor: ['font-awesome/css/font-awesome.css', 'bootstrap', 'bootstrap/dist/css/bootstrap.css', 'mdbootstrap/css/mdb.css',
+                    'event-source-polyfill', 'vue', 'vuex', 'axios', 'vue-router',
+                    'jquery', 'popper.js', 'mdbootstrap/js/mdb.js'],
         },
         output: {
             path: path.join(__dirname, 'wwwroot', 'dist'),
